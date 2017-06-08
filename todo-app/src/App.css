@@ -1,1 +1,62 @@
+.todobox {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: auto;
+}
+.searchField {
+  height: 50px;
+}
+.ActionButtons {
+  display: flex;
+  flex-direction: row;
+}
+.ActionButtonClass {
+  flex: 1;
+  height: 30px;
+  width: 110px;
 
+}
+.searchFieldInput {
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+}
+.inputEditItem{
+  margin-left: 15px;
+}
+.ActiveLabel {
+  margin-left: 15px;
+  font-size: 18px;
+  font-family: "Times New Roman", Georgia, Serif;
+}
+.CompleteLabel{
+  margin-left: 15px;
+  font-size: 18px;
+  font-family: "Times New Roman", Georgia, Serif;
+  text-decoration: line-through;
+}
+.ListItemsForTodo{
+  list-style-type: none;
+  padding: inherit;
+}
+.listItem{
+  margin: 10px;
+}
+.deleteButton {
+  background-color: rgba(1,1,1,0);
+  height: 30px;
+  width: 30px;
+  font-size: 20px;
+  border: none;
+  color: gray;
+  float: right;
+}
+.editButton {
+  background-color: rgba(1,1,1,0);
+  height: 30px;
+  width: 30px;
+  border: none;
+  color: red;
+  float: right;
+}
