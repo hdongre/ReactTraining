@@ -24,8 +24,7 @@ class App extends Component {
   }
 
   addTextInTodoList(event) {
-    if (event.key === 'Enter') {
-      // clear this textfield and add into todo list
+    if (event.key === 'Enter' && this.state.inputField.length >0) {
       this.updateList();
       this.setState({inputField:''});
     }
@@ -36,7 +35,6 @@ class App extends Component {
   }
 
   onChangeCheckBoxState(event) {
-    var statusValue = 'active';
     this.state.listItem.forEach((item)=>{
       if (item.id === parseInt(event.target.id)) {
         item.status = event.target.checked?'complete':'active';
@@ -67,11 +65,13 @@ class App extends Component {
     var arrListItems = this.state.listItem;
     const items =  arrListItems.map((item,key)=> {
       if (this.state.showList === 'all') {
-        return <li><ListItemsForTodo onClickCancel={this.deleteItemFromList} onClickCheckbox={this.onChangeCheckBoxState} listItem={item}/></li>
+        return <li key={item.id}><ListItemsForTodo onClickCancel={this.deleteItemFromList} onClickCheckbox={this.onChangeCheckBoxState} listItem={item}/></li>
       } else if (this.state.showList === 'active' && item.status === 'active') {
-        return <li><ListItemsForTodo onClickCancel={this.deleteItemFromList} onClickCheckbox={this.onChangeCheckBoxState} listItem={item}/></li>
+        return <li key={item.id}><ListItemsForTodo onClickCancel={this.deleteItemFromList} onClickCheckbox={this.onChangeCheckBoxState} listItem={item}/></li>
       } else if (this.state.showList === 'complete' && item.status === 'complete') {
-        return <li><ListItemsForTodo onClickCancel={this.deleteItemFromList} onClickCheckbox={this.onChangeCheckBoxState} listItem={item}/></li>
+        return <li key={item.id}><ListItemsForTodo onClickCancel={this.deleteItemFromList} onClickCheckbox={this.onChangeCheckBoxState} listItem={item}/></li>
+      } else {
+        return null;
       }
     });
 
@@ -101,7 +101,7 @@ class ListItemsForTodo extends Component {
   render(){
     return(
       <div>
-        <CheckboxItem type="checkbox" listItem={this.props.listItem} id={this.props.listItem.id} onChange={this.props.onClickCheckbox}/>
+        <CheckboxItem listItem={this.props.listItem} id={this.props.listItem.id} onChange={this.props.onClickCheckbox}/>
         <LabelItem listItem={this.props.listItem} id={this.props.listItem.id} />
         <button id={this.props.listItem.id} onClick={this.props.onClickCancel}>Delete</button>
       </div>
@@ -113,9 +113,9 @@ class CheckboxItem extends Component {
   render(){
     var itembox = null;
     if (this.props.listItem.status === 'complete') {
-    itembox = <input type={this.props.type} id={this.props.id} onChange={this.props.onChange} checked/>
+      itembox = <input type="checkbox"  id={this.props.id} onChange={this.props.onChange} checked/>
     } else {
-    itembox =  <input type={this.props.type} id={this.props.id} onChange={this.props.onChange}/>
+      itembox =  <input type="checkbox"  id={this.props.id} onChange={this.props.onChange}/>
     }
     return(itembox);
   }
